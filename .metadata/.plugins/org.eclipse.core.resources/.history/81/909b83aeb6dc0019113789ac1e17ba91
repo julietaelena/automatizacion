@@ -1,0 +1,62 @@
+package com.proyecto.pruebas;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ebaytest {
+	private WebDriver driver;
+	
+	@Before
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
+		
+		driver =  new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.ebay.com");
+	}
+	@Test
+	public void ebay() {
+		 
+		 driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		 WebElement txtbuscar= driver.findElement(By.xpath("//*[@id='gh-ac']"));
+		 txtbuscar.sendKeys("shoes");
+		 
+		
+		 WebElement btnbuscar= driver.findElement(By.xpath("//*[@id='gh-btn']"));
+		 btnbuscar.click();
+		 WebElement txtmarca= driver.findElement(By.xpath("//html/body"));
+		 txtmarca.sendKeys("PUMA");
+		 
+		 
+		 WebElement rbtmarca= driver.findElement(By.xpath("//*[@id='e1-53']/a/span"));
+		 rbtmarca.click();
+		 
+		
+		 WebElement rbttalla= driver.findElement(By.xpath("//*[@id='e1-29']/a/span[1]"));
+		 rbttalla.click();
+		
+		 //---------ponder en modo lista-------------------------------------------------------------------
+		 WebElement cbxlista= driver.findElement(By.xpath("//*[@id='viewType']/span[2]"));
+		 cbxlista.click();
+		 
+		 WebElement seleclista= driver.findElement(By.xpath("//*[@id='ViewTypeMenu']/li[1]/a/span"));
+		 seleclista.click();
+	}
+	@After
+	public void tearDown () {
+		driver.quit();
+	}
+	
+
+}
+	
+	
+	
+

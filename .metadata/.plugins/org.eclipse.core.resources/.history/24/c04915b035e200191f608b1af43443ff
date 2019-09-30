@@ -1,0 +1,84 @@
+package com.proyecto.pruebas;
+
+import java.beans.Expression;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ebaytest {
+	private WebDriver driver;
+	
+	@Before
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
+		
+		driver =  new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.ebay.com");
+		
+		
+	}
+	@Test
+	public void ebay() throws InterruptedException {
+		
+		
+		 
+		 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		 WebElement txtbuscar= driver.findElement(By.xpath("//*[@id='gh-ac']"));
+		 txtbuscar.sendKeys("shoes");
+		 
+		
+		 WebElement btnbuscar= driver.findElement(By.xpath("//*[@id='gh-btn']"));
+		 btnbuscar.click();
+		 
+		 // scroll
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 js.executeScript("window.scrollBy(0,700)");
+		 
+		 //WebElement txtmarca= driver.findElement(By.id("refineOverlay"));
+		 WebElement txtmarca= driver.findElement(By.className("x-searchable-list__textbox__aspect-Brand"));
+		 
+		 
+		 txtmarca.sendKeys("PUMA");
+		 
+		 Thread.sleep(1000);
+		 js.executeScript("window.scrollBy(0,40)");
+		 
+		 txtmarca.click();
+		 
+		 
+		// WebElement rbtmarca= driver.findElement(By.className("x-refine__group_1__1"));
+		// rbtmarca.click();
+		 WebElement rbtmarca1= driver.findElement(By.className("cbx x-refine__multi-select-checkbox"));
+		 rbtmarca1.click();
+		
+		
+		
+		 WebElement rbttalla= driver.findElement(By.xpath("//*[@id='e1-29']/a/span[1]"));
+		 rbttalla.click();
+		
+		 //---------ponder en modo lista-------------------------------------------------------------------
+		 WebElement cbxlista= driver.findElement(By.xpath("//*[@id='viewType']/span[2]"));
+		 cbxlista.click();
+		 
+		 WebElement seleclista= driver.findElement(By.xpath("//*[@id='ViewTypeMenu']/li[1]/a/span"));
+		 seleclista.click();
+	}
+	@After
+	public void tearDown () {
+		driver.quit();
+	}
+	
+
+}
+	
+	
+	
+
